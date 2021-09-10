@@ -1,4 +1,8 @@
 # Correios.Pacotes
+![alt text](https://i.imgur.com/Mlst3gD.png)
+
+
+
 
 Obtenha informações dos seus pacotes ou encomendas dos correios brasileiros.
 
@@ -22,21 +26,48 @@ Exemplo
 
 ```csharp
 
- static void Main(string[] args)
+ namespace Correios.Pacotes
+{
+    public class ListarTodosPacotes
+    {
+        public void ListarTudo()
         {
             Rastreador rastreador = new Rastreador();
 
-            Pacote pacote = rastreador.ObterPacote("OF310011814BR");
+            List<string> pacotes = new List<string> { "LE372339114SE", "LB302566998HK", "LE374432695SE", "LE374813610SE", "LE375761255SE", "LE375757653SE" };
 
-            Console.WriteLine("Data - Localização - StatusCorreio - Observação");
-            foreach (Status status in pacote?.Historico)
+            foreach (string item in pacotes)
             {
-                Console.WriteLine("{0:dd/MM/yyyy HH:mm} - {1} - {2} - {3}", status.Data, status.Localizacao, status.StatusCorreio, status.Observacao);
-                Console.WriteLine("###############################################################");
-            }
+                Pacote pacote = rastreador.ObterPacote(item);
 
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"@@@@@@ RASTREIO DO PACOTE {item} @@@@@@@ \n");
+                Console.ResetColor();
+
+                Console.WriteLine("Data - Localização - StatusCorreio - Observação");
+                foreach (Status status in pacote?.Historico)
+                {
+                    if (status.StatusCorreio.ToString().Contains("saiu"))
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine($@" {status.Data} {status.Localizacao} {status.StatusCorreio} {status.Observacao}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+
+                        Console.WriteLine($@" {status.Data} {status.Localizacao} {status.StatusCorreio} {status.Observacao}");
+                    }
+                    Console.WriteLine("###############################################################");
+                }
+                Console.WriteLine("\n \n");
+            }
             Console.ReadLine();
         }
+    }
+}
 
 ```
 

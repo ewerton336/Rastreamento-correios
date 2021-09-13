@@ -10,11 +10,10 @@ namespace Correios.Pacotes.Exemplos
     {
         static void Main(string[] args)
         {
-            var tudo = new ListarTodosPacotes();
-            tudo.ListarTudo();
-
-            var ultimo = new ObterUltimaAtualizacao();
-            //ultimo.ObterUltima();
+            var executar = new BLL.ExecutarTarefas();
+            executar.RodarTarefas();
         }
     }
 }
+
+

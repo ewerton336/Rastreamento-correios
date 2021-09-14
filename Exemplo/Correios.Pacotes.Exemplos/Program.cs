@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Correios.Pacotes;
 
-namespace Correios.Pacotes.Exemplos
+namespace Correios.Pacotes
 {
     class Program
     {

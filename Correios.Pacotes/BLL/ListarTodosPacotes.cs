@@ -7,11 +7,10 @@ namespace Correios.Pacotes
 {
     public class ListarTodosPacotes
     {
-        public void ListarTudo()
+        public void ListarTudo(List<string> pacotes)
         {
             Rastreador rastreador = new Rastreador();
 
-            List<string> pacotes = new List<string> { "LE372339114SE", "LB302566998HK", "LE374432695SE", "LE374813610SE", "LE375761255SE", "LE375757653SE" };
 
             foreach (string item in pacotes)
             {

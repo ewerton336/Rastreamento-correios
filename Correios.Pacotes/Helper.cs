@@ -10,7 +10,7 @@ namespace Correios.Pacotes
     {
         public static string _ambiente { get; set; }
 
-        public Helper(string  ambiente)
+
         {
             ambiente = _ambiente;
         }

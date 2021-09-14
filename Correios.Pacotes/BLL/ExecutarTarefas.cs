@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using Correios.Pacotes;
 using Correios.Pacotes.DAO;
-using Correios.Pacotes.Models;
 
 
 namespace Correios.Pacotes.BLL
@@ -13,26 +12,37 @@ namespace Correios.Pacotes.BLL
     {
         public void RodarTarefas()
         {
+           
 
-            string[] linhas = System.IO.File.ReadAllLines(@"/rastreio.txt");
 
-            var pacotesDao = new DAO.CrudPacotes(Helper.DBConnectionOracle);
+            #region pegar codigos de rastreio no bloco de notas e colocar no banco de dados
 
-            List<string> pacotes = new List<string>();
+            /* string[] linhas = System.IO.File.ReadAllLines(@"/rastreio.txt");
+                     List<string> pacotes = new List<string>();
 
             foreach (string linha in linhas)
             {
-                pacotesDao.InserirPacote(linha);
+                try
+                {
+                    pacotesDao.InserirPacote(linha);
+                }
+                catch (Exception ex)
+                {
+                    Console.Write($"Erro ao inserir o pacote {linha}. Erro: {ex} ");
+                    continue;
+                }
             }
+            */
 
-
-            var listaPacotes = pacotesDao.GetRastreios();
+            #endregion
 
             //var tudo = new ListarTodosPacotes();
             //tudo.ListarTudo(pacotes);
 
             var ultimo = new ObterUltimaAtualizacao();
-            ultimo.ObterUltima(pacotes);
+
+                ultimo.ObterUltima();
+ 
         }
     }
 }

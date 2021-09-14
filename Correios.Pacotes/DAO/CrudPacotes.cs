@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Correios.Pacotes.Models;
 
 namespace Correios.Pacotes.DAO
 {
@@ -11,22 +12,21 @@ namespace Correios.Pacotes.DAO
 
         public CrudPacotes(IDbConnection dbConnection) : base(dbConnection)
         {
+
         }
 
 
-        public IEnumerable<String> GetRastreios()
+        public IEnumerable<Pacote> GetRastreios()
         {
             var sql = @"SELECT
-                        CODIGO_RASTREIO
+                        ID
+                        ,CODIGO_RASTREIO CODIGO
                         FROM T2S.RASTREAMENTO_CORREIOS
                         WHERE ENTREGUE != 1";
 
-            var result = DbConnection.Query<string>(sql);
+            var result = DbConnection.Query<Pacote>(sql);
             return result;
         }
-
-
-
 
         public IEnumerable<Models.Pacote> GetPacotes()
         {
@@ -63,6 +63,14 @@ namespace Correios.Pacotes.DAO
             {
                 throw e;
             }
+        }
+
+        public void EncerrarPacoteEntregue(int idPacote)
+        {
+            string sql = @"UPDATE T2S.RASTREAMENTO_CORREIOS
+                            SET ENTREGUE = 1
+                            WHERE ID = :ID";
+            var result = DbConnection.Execute(sql, new { ID = idPacote });
         }
 
 

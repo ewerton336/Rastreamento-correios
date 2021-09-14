@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Correios.Pacotes
+namespace Correios.Pacotes.DAO
 {
     public class DaoConexao : IDisposable
     {
